@@ -1099,8 +1099,14 @@ Computing Machinery]
   \else
     \ClassInfo{\@classname}{Suppressing folios}%
   \fi}{\ClassError{\@classname}{printfolios must be true or false}}
+\define@boolkey+{@ACM@topmatter@}[@ACM@]{printconffootnote}[true]{%
+  \if@ACM@printfolios
+    \ClassInfo{\@classname}{Printing conference info footnote}%
+  \else
+    \ClassInfo{\@classname}{Suppressing conference info footnote}%
+  \fi}{\ClassError{\@classname}{printconffootnote must be true or false}}
 \def\settopmatter#1{\setkeys{@ACM@topmatter@}{#1}}
-\settopmatter{printccs=true, printacmref=true}
+\settopmatter{printccs=true, printacmref=true, printconffootnote=true}
 \if@ACM@manuscript
   \settopmatter{printfolios=true}
 \else
@@ -1362,6 +1368,7 @@ Computing Machinery]
     \footnotetextcopyrightpermission{%
       \def\par{\let\par\@par}\parindent\z@\@setthanks}%
   \fi
+  \if@ACM@printconffootnote
   \footnotetextcopyrightpermission{\parindent\z@\parskip0.1\baselineskip
   \if@ACM@authorversion\else
     \if@printpermission\@copyrightpermission\par\fi
@@ -1405,6 +1412,7 @@ Computing Machinery]
         \fi
       \fi
     \fi}%
+  \fi% printconffootnote
   \endgroup
   \setcounter{footnote}{0}%
   \@mkabstract
