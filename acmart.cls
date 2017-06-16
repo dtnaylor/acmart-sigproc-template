@@ -43,10 +43,10 @@ Computing Machinery]
 \def\@classname{acmart}
 \RequirePackage{xkeyval}
 \define@choicekey*+{acmart.cls}{format}[\ACM@format\ACM@format@nr]{%
-  manuscript, acmsmall, acmlarge, acmtog, sigconf, siggraph,
+  manuscript, acmsmall, acmlarge, acmtog, sigconf, sigcomm, siggraph,
   sigplan, sigchi, sigchi-a}[manuscript]{}{%
   \ClassError{\@classname}{The option format must be manuscript,
-    acmsmall, acmlarge, acmtog, sigconf, siggraph,
+    acmsmall, acmlarge, acmtog, sigconf, sigcomm, siggraph,
     sigplan, sigchi or sigchi-a}}
 \def\@DeclareACMFormat#1{\DeclareOptionX{#1}{\setkeys{acmart.cls}{format=#1}}}
 \@DeclareACMFormat{manuscript}
@@ -54,6 +54,7 @@ Computing Machinery]
 \@DeclareACMFormat{acmlarge}
 \@DeclareACMFormat{acmtog}
 \@DeclareACMFormat{sigconf}
+\@DeclareACMFormat{sigcomm}
 \@DeclareACMFormat{siggraph}
 \@DeclareACMFormat{sigplan}
 \@DeclareACMFormat{sigchi}
@@ -113,7 +114,7 @@ Computing Machinery]
 \newif\if@ACM@manuscript
 \newif\if@ACM@journal
 \newif\if@ACM@sigchiamode
-\ifnum\ACM@format@nr=5\relax % siggraph
+\ifnum\ACM@format@nr=6\relax % siggraph
   \ClassWarning{\@classname}{The format `siggraph' is now obsolete.
     I am switching to sigconf.}
   \setkeys{acmart.cls}{format=sigconf}
@@ -134,6 +135,8 @@ Computing Machinery]
 \or % acmtog
   \@ACM@journaltrue
 \or % sigconf
+  \@ACM@journalfalse
+\or % sigcomm
   \@ACM@journalfalse
 \or % siggraph
   \@ACM@journalfalse
@@ -159,6 +162,8 @@ Computing Machinery]
   \or % acmtog
     \def\ACM@fontsize{9pt}%
   \or % sigconf
+    \def\ACM@fontsize{9pt}%
+  \or % sigcomm
     \def\ACM@fontsize{9pt}%
   \or % siggraph
     \def\ACM@fontsize{9pt}%
@@ -396,6 +401,7 @@ Computing Machinery]
 \or % acmlarge
 \or % acmtog
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
   \urlstyle{sf}
@@ -477,6 +483,13 @@ Computing Machinery]
      top=57pt, bottom=73pt, inner=54pt, outer=54pt,
      marginparwidth=2pc
      }%
+\or % sigcomm
+   \geometry{twoside=true, head=13pt,
+     paperwidth=8.5in, paperheight=11in,
+     columnsep=2pc,
+     top=57pt, bottom=73pt, inner=54pt, outer=54pt,
+     marginparwidth=2pc
+     }%
 \or % siggraph
    \geometry{twoside=true, head=13pt,
      paperwidth=8.5in, paperheight=11in,
@@ -517,6 +530,7 @@ Computing Machinery]
 \or % acmtog
   \setlength\parindent{9\p@}%
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
 \or % sigchi
@@ -602,6 +616,7 @@ Computing Machinery]
   \or % acmsmall
   \or % acmlarge
   \or % acmtog
+  \or % sigcomm
   \or % sigconf
   \or % siggraph
     \captionsetup{textfont={it}}
@@ -655,6 +670,7 @@ Computing Machinery]
 \or % acmlarge
 \or % acmtog
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
 \def\labelenumi{\theenumi.}
@@ -1459,6 +1475,8 @@ Computing Machinery]
     \par\medskip\small\noindent#1: %
   \or % sigconf
     \section*{#1}%
+  \or % sigcomm
+    \section*{#1}%
   \or % siggraph
     \section*{#1}%
   \or % sigplan
@@ -1489,6 +1507,8 @@ Computing Machinery]
   \or % acmtog
     \twocolumn[\box\mktitle@bx]%
   \or % sigconf
+    \twocolumn[\box\mktitle@bx]%
+  \or % sigcomm
     \twocolumn[\box\mktitle@bx]%
   \or % siggraph
     \twocolumn[\box\mktitle@bx]%
@@ -1524,6 +1544,8 @@ Computing Machinery]
     \@mktitle@i
   \or % sigconf
     \@mktitle@iii
+  \or % sigcomm
+    \@mktitle@iii
   \or % siggraph
     \@mktitle@iii
   \or % sigplan
@@ -1546,6 +1568,8 @@ Computing Machinery]
     \Huge\sffamily
   \or % sigconf
     \Huge\sffamily\bfseries
+  \or % sigcomm
+    \Huge\sffamily\bfseries
   \or % siggraph
     \Huge\sffamily\bfseries
   \or % sigplan
@@ -1566,6 +1590,8 @@ Computing Machinery]
   \or % acmtog
      \LARGE
   \or % sigconf
+     \LARGE\mdseries
+  \or % sigcomm
      \LARGE\mdseries
   \or % siggraph
      \LARGE\mdseries
@@ -1679,6 +1705,8 @@ Computing Machinery]
     \@mkauthors@i
   \or % sigconf
     \@mkauthors@iii
+  \or % sigcomm
+    \@mkauthors@iii
   \or % siggraph
     \@mkauthors@iii
   \or % sigplan
@@ -1702,6 +1730,9 @@ Computing Machinery]
   \def\@authorfont{\LARGE\sffamily}
   \def\@affiliationfont{\large}
 \or % sigconf
+  \def\@authorfont{\LARGE}
+  \def\@affiliationfont{\large}
+\or % sigcomm
   \def\@authorfont{\LARGE}
   \def\@affiliationfont{\large}
 \or % siggraph
@@ -1887,6 +1918,8 @@ Computing Machinery]
     \par\bigskip
   \or % sigconf
     \par\bigskip
+  \or % sigcomm
+    \par\bigskip
   \or % siggraph
     \par\bigskip
   \or % sigplan
@@ -1926,6 +1959,8 @@ Computing Machinery]
   \or % acmtog
     \sffamily
   \or % sigconf
+    \sffamily
+  \or % sigcomm
     \sffamily
   \or % siggraph
     \sffamily
@@ -1970,7 +2005,47 @@ Computing Machinery]
       \shorttitle\quad\textbullet\quad\@acmArticle\if@ACM@printfolios:\thepage\fi}%
     \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
     \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
-  \else % Proceedings
+  \or % sigconf
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+    \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LE]{\ACM@linecount\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+  \or % sigcomm
+    \fancyfoot[C]{\if@ACM@printfolios\smallskip\thepage\fi}%
+    \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LE]{\ACM@linecount\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+  \or % siggraph
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+    \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LE]{\ACM@linecount\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+  \or % sigplan
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+    \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LE]{\ACM@linecount\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+  \or % sigchi
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+    \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LE]{\ACM@linecount\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+  \or % sigchi-a
     \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
     \fancyhead[LO]{\ACM@linecount\@headfootfont\shorttitle}%
     \fancyhead[RE]{\@headfootfont\@shortauthors}%
@@ -2053,7 +2128,22 @@ Computing Machinery]
     \@acmNumber, Article \@acmArticle.  Publication date:
     \@acmPubDate.}%
     \fancyhead[L]{\ACM@linecount}%
-  \else % Conference proceedings
+  \or % sigconf
+    \fancyhead[L]{\ACM@linecount}%
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+  \or % sigcomm
+    \fancyhead[L]{\ACM@linecount}%
+    \fancyfoot[C]{\if@ACM@printfolios\smallskip\thepage\fi}%
+  \or % siggraph
+    \fancyhead[L]{\ACM@linecount}%
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+  \or % sigplan
+    \fancyhead[L]{\ACM@linecount}%
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+  \or % sigchi
+    \fancyhead[L]{\ACM@linecount}%
+    \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
+  \or % sigchi-a
     \fancyhead[L]{\ACM@linecount}%
     \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
   \fi
@@ -2099,6 +2189,13 @@ Computing Machinery]
 \or % sigconf
  \def\@secfont{\bfseries\Large\section@raggedright\MakeUppercase}
  \def\@subsecfont{\bfseries\Large\section@raggedright}
+\or % sigcomm
+ \def\@secfont{\bfseries\Large\section@raggedright}
+ \def\@subsecfont{\bfseries\large\section@raggedright}
+ \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
+   {.25\baselineskip}%
+   {\@subsubsecfont}}
 \or % siggraph
  \def\@secfont{\bfseries\sffamily\Large\section@raggedright\MakeUppercase}
  \def\@subsecfont{\bfseries\sffamily\Large\section@raggedright}
@@ -2142,6 +2239,7 @@ Computing Machinery]
 \or % acmlarge
 \or % acmtog
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
   \def\@acmplainbodyfont{\itshape}
@@ -2172,6 +2270,7 @@ Computing Machinery]
 \or % acmlarge
 \or % acmtog
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
   \def\@acmdefinitionbodyfont{\normalfont}
@@ -2210,6 +2309,7 @@ Computing Machinery]
 \or % acmlarge
 \or % acmtog
 \or % sigconf
+\or % sigcomm
 \or % siggraph
 \or % sigplan
   \def\@proofnamefont{\itshape}
